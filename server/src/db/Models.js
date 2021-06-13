@@ -16,7 +16,17 @@ const Users = sequelize.define('users', {
   password: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
+  createdAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+    allowNull: false,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+    allowNull: false,
+  },
 });
 
 const Remembers = sequelize.define('remembers', {
@@ -37,15 +47,25 @@ const Remembers = sequelize.define('remembers', {
   text: {
     type: DataTypes.STRING,
     allowNull: false,
-  }
+  },
+  createdAt: {
+    type: DataTypes.DATEONLY,
+    defaultValue: DataTypes.NOW,
+  },
+  updatedAt: {
+    type: DataTypes.DATE,
+    defaultValue: DataTypes.NOW,
+  },
 });
 
-/* umcoment that to create the tables
+// umcoment that to create the tables 
+/*
 (async () => {
   await Users.sync();
   await Remembers.sync();
 })();
-*/// this creates the tables if it doesn't exist (does nothing if already exist)
+*/
+// this creates the tables if it doesn't exist (does nothing if already exist)
 
 module.exports = {
   Users,

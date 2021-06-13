@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const jwt = require("jsonwebtoken");
 const md5 = require('md5');
-const { Users } = require('./db/Models');
+const { Users, Remembers } = require('./db/Models');
 
 require('dotenv').config();
 
@@ -40,8 +40,13 @@ router.post('/api/signup', async (req, res) => {
     });
   }
 
+  const tokenPayload = JSON.stringify({
+    username: usernameFormated,
+    password: passwordEncrypted,
+  });
+
   const token = jwt.sign({
-    data: `${usernameFormated}${passwordEncrypted}`,
+    data: tokenPayload,
   }, SECRET, { expiresIn: (60 * 60) * 5 }); // 5 hours
 
   try {
@@ -91,8 +96,13 @@ router.post('/api/signin', async (req, res) => {
     });
 
     if (query !== null) {
+      const tokenPayload = JSON.stringify({
+        username: usernameFormated,
+        password: passwordEncrypted,
+      });
+
       const token = jwt.sign({
-        data: `${usernameFormated}${passwordEncrypted}`,
+        data: tokenPayload,
       }, SECRET, { expiresIn: (60 * 60) * 5 }); // 5 hours
 
       return res.json({
@@ -121,7 +131,7 @@ router.post('/api/checktoken', (req, res) => {
     });
   }
   
-  jwt.verify(token, SECRET, (err, decoded) => {
+  jwt.verify(token, SECRET, (err, _) => {
     if (err) {
       return res.json({
         error: "Invalid token",
@@ -134,9 +144,61 @@ router.post('/api/checktoken', (req, res) => {
   });
 });
 
-router.get('/api/remembers', (req, res) => {
-  return res.json({
-    path: '/api/remembers',
+router.get('/api/remembers', async (req, res) => {
+  const token = req.query.token;
+
+  const getData = async (data) => {
+    const { username, password } = data;
+
+    const query = await Users.findOne({
+      attributes: ["id"],
+      where: {
+        username,
+        password
+      }
+    });
+
+    if (query !== null) {
+      const allRemembers = await Remembers.findAll({
+        attributes: ['title', 'text', 'id'],
+        where: {
+          id: query.dataValues.id,
+        }
+      })
+
+      if (allRemembers.length === 0) {
+        console.log('oi')
+        return {
+          error: "You not have remembers!",
+        };
+      } else {
+        return {
+          data: allRemembers,
+        };
+      }
+    } else {
+      return {
+        error: "User not exist",
+      };
+    }
+  }
+
+  if (!token) {
+    return res.json({
+      error: "Invalid token!",
+    });
+  }
+
+  jwt.verify(String(token), SECRET, async (err, decoded) => {
+    if (err) {
+      return res.json({
+        error: "Invalid token",
+      });
+    } else {
+      const data = JSON.parse(decoded.data);
+      const result = await getData(data);
+      return res.json(result);
+    }
   });
 });
 
