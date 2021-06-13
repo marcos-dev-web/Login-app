@@ -40,12 +40,12 @@ const Remembers = sequelize.define('remembers', {
   }
 });
 
+/* umcoment that to create the tables
 (async () => {
   await Users.sync();
   await Remembers.sync();
 })();
-
-// this creates the tables if it doesn't exist (does nothing if already exist)
+*/// this creates the tables if it doesn't exist (does nothing if already exist)
 
 module.exports = {
   Users,
