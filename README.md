@@ -4,7 +4,8 @@ application to pratique authentication
 
 # API
 
-- to do login `[POST] /api/signin`
+To do login `[POST] /api/signin`
+---
 
 **pass in body**
 ```javascript
@@ -23,7 +24,8 @@ application to pratique authentication
 }
 ```
 
-- to create an account `[POST] /api/signup`
+To create an account `[POST] /api/signup`
+---
 
 **pass body**
 ```javascript
@@ -43,7 +45,8 @@ application to pratique authentication
 }
 ```
 
-- to check token `[POST] /api/checktoken`
+To check token `[POST] /api/checktoken`
+---
 
 **pass in body**
 ```javascript
@@ -67,7 +70,8 @@ application to pratique authentication
 
 ```
 
-- to get all remembers `[GET] /api/remembers`
+To get all remembers `[GET] /api/remembers`
+---
 
 **pass in query**
 ```
@@ -96,7 +100,8 @@ application to pratique authentication
 
 ```
 
-- to create new remmeber `[POST] /api/remembers/create`
+To create new remmeber `[POST] /api/remembers/create`
+---
 
 **pass in body**
 ```javascript
@@ -121,7 +126,8 @@ application to pratique authentication
 }
 ```
 
-- to delete a rememeber `[POST] /api/remembers/delete`
+To delete a rememeber `[POST] /api/remembers/delete`
+---
 
 **pass in body**
 ```javascript
