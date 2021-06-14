@@ -2,7 +2,7 @@ import axios from '../utils/axios';
 
 const handleRemembers = {
   create: async (token, title, text) => {
-    const response = await axios.post('/remembers/create', {
+    const response = await axios.post('/remembers/new', {
       token,
       title,
       text
