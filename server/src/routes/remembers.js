@@ -29,6 +29,7 @@ const getData = async (data) => {
       };
     } else {
       return {
+				error: "",
         data: allRemembers,
       };
     }

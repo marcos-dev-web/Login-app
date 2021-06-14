@@ -59,3 +59,10 @@ export const Link = styled.a`
     color: black;
   }
 `;
+
+export const Error = styled.p`
+  color: #f94242;
+  width: 100%;
+  height: 4rem;
+  text-align: center;
+`;

@@ -35,7 +35,7 @@ module.exports = async (req, res) => {
     }
   } catch (err) {
     return res.json({
-      error: "Error on login, Try again",
+      error: "Error on singup, Try again",
     });
   }
 
