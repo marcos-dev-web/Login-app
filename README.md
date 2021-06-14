@@ -44,6 +44,7 @@ application to pratique authentication
 ```
 
 - to check token `[POST] /api/checktoken`
+
 **pass in body**
 ```javascript
 {
@@ -51,6 +52,7 @@ application to pratique authentication
 }
 
 ```
+
 **you receive**
 ```javascript
 // if is valid
@@ -76,14 +78,14 @@ application to pratique authentication
 ```javascript
 //if success
 {
-	error: "",
+    error: "",
 	data: [
-			{
-				id: Number,
-				title: String,
-				text: String
-			},
-			...
+		{
+			id: Number,
+			title: String,
+			text: String
+		},
+		...
 	]
 }
 
@@ -95,6 +97,7 @@ application to pratique authentication
 ```
 
 - to create new remmeber `[POST] /api/remembers/create`
+
 **pass in body**
 ```javascript
 {
@@ -119,6 +122,7 @@ application to pratique authentication
 ```
 
 - to delete a rememeber `[POST] /api/remembers/delete`
+
 **pass in body**
 ```javascript
 {
