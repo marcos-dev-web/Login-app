@@ -5,7 +5,6 @@ const SECRET = process.env.SECRET;
 
 module.exports = (req, res) => {
   
-	console.log(req.body);
   const { token } = req.body;
 
   if (!token) {

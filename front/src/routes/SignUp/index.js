@@ -14,11 +14,10 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
 
-import Redirect from '../../utils/Redirect';
-import verifyIfIsLogged from '../../utils/verifyIfIsLogged';
+import isAuthenticated from '../../utils/verifyIfIsLogged';
 
 import axios from '../../utils/axios';
-import saveToken from '../../utils/saveToken';
+import handleToken from '../../requests/handleToken';
 
 const SignUp = () => {
   const [username, setUsername] = useState('');
@@ -27,13 +26,13 @@ const SignUp = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    document.title = "Sign Up"
+    
     async function fetchData() {
-      const isLogged = await verifyIfIsLogged();
+      const isLogged = await isAuthenticated();
 
       if (isLogged) {
-        return (
-          <Redirect to="/" />
-        );
+        window.location = '/';
       }
     }
     fetchData();
@@ -67,7 +66,8 @@ const SignUp = () => {
       setErrorMessage(response.data.error);
     } else {
       setLoading(false);
-      saveToken(response.data.token);
+      handleToken.save(response.data.token);
+      localStorage.setItem('username', response.data.username);
       window.location = '/';
     }
   }

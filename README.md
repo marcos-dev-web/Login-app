@@ -18,7 +18,8 @@ application to pratique authentication
 ```javascript
 {
 	error: "",
-	token: "TOKEN_JWT"
+	token: "TOKEN_JWT",
+	username: String
 }
 ```
 
@@ -37,11 +38,12 @@ application to pratique authentication
 ```javascript
 {
 	error: "",
-	token: "TOKEN_JWT"
+	token: "TOKEN_JWT",
+	username: String
 }
 ```
 
-- to check token
+- to check token `[POST] /api/checktoken`
 **pass in body**
 ```javascript
 {

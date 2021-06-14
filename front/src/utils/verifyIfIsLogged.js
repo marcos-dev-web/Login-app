@@ -14,7 +14,7 @@ const verifyIfIsLogged = async () => {
       return true;
     }
   } else {
-    return false;
+      return false;
   }
 }
 

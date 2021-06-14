@@ -17,7 +17,6 @@ module.exports = async (req, res) => {
     });
   }
 
-
   const usernameFormated = String(username).trim();
   const passwordEncrypted = md5(String(password));
 
@@ -57,7 +56,8 @@ module.exports = async (req, res) => {
     if (resDb) {
       return res.json({
         error: "",
-        token
+        token,
+				username: usernameFormated,
       });
     } else {
       return res.json({

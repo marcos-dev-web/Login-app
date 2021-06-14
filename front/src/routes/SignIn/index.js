@@ -14,30 +14,29 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import Loading from '../../components/Loading';
 
-import Redirect from '../../utils/Redirect';
-import verifyIfIsLogged from '../../utils/verifyIfIsLogged';
-
 import axios from '../../utils/axios';
-import saveToken from '../../utils/saveToken';
+import handleToken from '../../requests/handleToken';
 
-const SignUp = () => {
+import isAuthenticated from '../../utils/verifyIfIsLogged';
+
+const SignIn = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    document.title = "Sign In";
+
     async function fetchData() {
-      const isLogged = await verifyIfIsLogged();
+      const isLogged = await isAuthenticated();
 
       if (isLogged) {
-        return (
-          <Redirect to="/" />
-        );
+        window.location = '/';
       }
     }
     fetchData();
-  }, []);
+  }, [])
 
   const submit = async () => {
     const acceptUsernameChars = 'abcdefghijklmnopqrstuvwxyz0123456789_'.split('');
@@ -67,7 +66,8 @@ const SignUp = () => {
       setErrorMessage(response.data.error);
     } else {
       setLoading(false);
-      saveToken(response.data.token);
+      handleToken.save(response.data.token);
+      localStorage.setItem('username', response.data.username);
       window.location = '/';
     }
   }
@@ -103,4 +103,4 @@ const SignUp = () => {
   );
 }
 
-export default SignUp;
+export default SignIn;

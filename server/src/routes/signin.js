@@ -41,6 +41,7 @@ module.exports = async (req, res) => {
       return res.json({
         error: '',
         token,
+				username: usernameFormated,
       })
     } else {
       return res.json({
