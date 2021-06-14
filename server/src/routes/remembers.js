@@ -19,7 +19,7 @@ const getData = async (data) => {
     const allRemembers = await Remembers.findAll({
       attributes: ['title', 'text', 'id'],
       where: {
-        id: query.dataValues.id,
+        identifier: query.dataValues.id,
       }
     })
 

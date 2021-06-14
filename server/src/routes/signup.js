@@ -17,8 +17,6 @@ module.exports = async (req, res) => {
     });
   }
 
-  console.log("\n\nsecret\n\n",SECRET)
-
 
   const usernameFormated = String(username).trim();
   const passwordEncrypted = md5(String(password));
